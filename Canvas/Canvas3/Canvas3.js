@@ -29,8 +29,8 @@ const arc_start = 0;
 const arc_end = 2*PI;	
 var colorArr = ['red' , 'blue' , 'yellow' , 'purple' , 'green' , 'orange' , 'pink' , 'silver' , 'black'  ]	
 var color = colorArr[3];	
-var dx = 10;
-var dy = 10;		
+var dx = 10;			//	X-Vextor	
+var dy = 10;			//	Y-Vextor		
 
 //	Function to display a circle
 function displayCircle(center_x_pos,center_y_pos,radius,arc_start,arc_end,color) 
@@ -42,8 +42,7 @@ function displayCircle(center_x_pos,center_y_pos,radius,arc_start,arc_end,color)
 	ctx.closePath();  	
 }
 
-
-
+//	Function to randomly initialize  x & y positions, radius, colour, dx & dy
 function randomInitialize() 
 {
 	center_x_pos = (Math.random() * maxCanvasWidth) ;
@@ -54,6 +53,7 @@ function randomInitialize()
 	dy = (Math.random()-.5)*(2*dy);			//	-.5 to change value to +ve or -ve 	&	*(2*dx) to speed it up
 }
 
+//	Function to check if a ball collides with the canvas border
 function borderCollision(/*center_x_pos,center_y_pos,radius*/) 
 {
 	if (center_x_pos + radius >= maxCanvasWidth) 
@@ -74,6 +74,7 @@ function borderCollision(/*center_x_pos,center_y_pos,radius*/)
 	}
 }
 
+//Function to animate a ball
 function animate() 
 {
 	console.log('Function : animate');
