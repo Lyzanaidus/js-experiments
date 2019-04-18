@@ -2,55 +2,97 @@ var mage = document.getElementById('mage');
 
 var MinWidth = 0 ;
 var MaxWidth = -200 ;
-var FPS = 40;
-var INTERVAL = 1000/FPS;
-
+var FPS = 60;
+var MAGE_INTERVAL = 1000/FPS;  
 
 var mageMove = 0;
 var xDir = -1;
-
-
 var int;
+var pause = 1;
+
+function checkDir(mageMove) 
+{
+  console.log('Function : checkDir');
+  if (mageMove >= MinWidth) 
+  {
+    xDir = -1;
+  }
+  else if (mageMove <= MaxWidth) 
+  {
+    xDir = 5;
+  }
+}
+
+function checkPause(mageMove)
+{
+  console.log('Function : checkPause');
+  if (mageMove === MinWidth - xDir) 
+  {
+    pause = 1;
+  }
+  else if (mageMove === MaxWidth) 
+  {
+    pause = 0;
+  }
+}
+
+function left() 
+{
+  console.log('Function : left');
+  
+  if (mageMove < -100) 
+  {
+    console.log('asd')
+  }
+}
+
+function right() 
+{
+  console.log('Function : right');
+  
+  if (mageMove >= -200) 
+  {
+    clearInterval(int);
+    console.log('Interval Cleared')
+    mageMove = mageMove - 100;
+  }
+
+}
 
 function start() 
 {
-  setInterval(animate,INTERVAL);
+  console.log('Function : start');
+  
+  int = setInterval(movemage,MAGE_INTERVAL);
 }
 
 function delay() 
 {
-  console.log('Delay');
-  setTimeout(start,3000);
+  console.log('Function : delay');
+ 
+  setTimeout(start,1000);
 }
 
-
-                // Using setTimeout
-function animate() 
+function movemage() 
 {
-      if (mageMove <= MaxWidth) 
-      {
-        xDir = 1;
-      }
+  console.log('Function : movemage');
+  
+  checkDir(mageMove);
+  checkPause(mageMove)
+  
 
-      else if (mageMove >= MinWidth) 
-      {
-        xDir = -1;
-      }
+  mageMove = mageMove + xDir;
+  mage.style.marginLeft = mageMove + '%';
 
-      mageMove = mageMove + xDir;
-      mage.style.marginLeft = mageMove + '%';
+  console.log('xDir = ',xDir , 'mageMove = ',mageMove , 'pause = ',pause, 'MinWidth = ' , MinWidth , "MaxWidth = " , MaxWidth);
 
-      console.log('xDir = ',xDir);
-      console.log('mageMove = ',mageMove);
-      console.log('MinWidth = ',MinWidth , " | MaxWidth = " , MaxWidth);
-
-      if (mageMove % 100 === 0 && xDir===1) 
-      {
-        clearInterval(int);
-        delay();
-      }
-};
-
-//delay();
+  if (mageMove % 100 === 0 && pause === 1) 
+  {
+    clearInterval(int);
+    console.log('Interval Cleared')
+    delay();
+  }
+}
 
 start();
+

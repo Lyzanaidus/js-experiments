@@ -10,6 +10,26 @@ var xDir = -1;
 var int;
 var pause = 1;
 
+function left() 
+{
+  if (mageMove <= -100) 
+  {
+    mageMove = mageMove + 100;
+    clearInterval(int);
+    console.log('Interval Cleared')
+  }
+}
+
+function right() 
+{
+  if (mageMove >= -200) 
+  {
+    mageMove = mageMove - 100;
+    clearInterval(int);
+    console.log('Interval Cleared')
+  }
+}
+
 function start() 
 {
   int = setInterval(movemage,MAGE_INTERVAL);
@@ -27,13 +47,12 @@ function movemage()
   {
     xDir = -1;
   }
-
   else if (mageMove <= MaxWidth) 
   {
     xDir = 5;
   }
 
-  if (mageMove === MinWidth) 
+  if (mageMove === MinWidth - xDir) 
   {
     pause = 1;
   }
